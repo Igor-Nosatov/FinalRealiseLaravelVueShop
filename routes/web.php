@@ -1,3 +1,3 @@
 <?php
 
-Route::get('/', 'HomeController@index');
+Route::get('/{any}', function(){ return view('app');  })->where('any', '.*');
