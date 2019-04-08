@@ -574,5 +574,15 @@ class ProductTableSeeder extends Seeder
           'brand_id' => '4',
           'color_id' => '1'
       ]);
+
+
+
+
+
+
+
+
+
+
     }
 }

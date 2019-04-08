@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableReview extends Migration
+class CreateReviewsTable extends Migration
 {
     /**
      * Run the migrations.

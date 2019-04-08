@@ -4,24 +4,28 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrdersTable extends Migration
+class CreateProductsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->nullable();
-            $table->integer('price')->nullable();
-            $table->integer('qty')->nullable();
-            $table->unsignedInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('name');
+            $table->integer('price');
+            $table->text('description');
+            $table->integer('old_price');
+            $table->string('image');
             $table->timestamps();
+            $table->unsignedInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedInteger('brand_id')->nullable();
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
+            $table->unsignedInteger('color_id')->nullable();
+            $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade');
+            $table->softDeletes();
         });
+
     }
 
     /**
@@ -31,6 +35,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('products');
     }
 }
