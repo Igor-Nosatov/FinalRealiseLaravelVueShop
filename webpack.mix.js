@@ -15,7 +15,7 @@ mix.styles([
     'public/css/vendor/nouislider.min.css',
     'public/css/vendor/owl.carousel.css',
     'public/css/vendor/themify-icons.css'
-], 'public/css/all.css');
+], 'public/css/app.css');
 
 mix.scripts([
     'public/js/vendor/jquery-2.2.4.min.js',

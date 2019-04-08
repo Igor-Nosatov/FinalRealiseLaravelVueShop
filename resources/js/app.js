@@ -11,11 +11,16 @@ import axios from 'axios';
 import App from './App.vue';
 Vue.use(VueAxios, axios);
 
-import Router from './routes/routing.vue'
+import ExampleComponent from './components/ExampleComponent.vue';
 
-Vue.component('footer-component', require('./parts/FooterComponent').default);
 
-const router = new VueRouter({
-    mode: 'history',
-    routes: Router
-})
+const routes = [
+  {
+      name: 'example',
+      path: '/',
+      component: ExampleComponent
+  }
+];
+
+const router = new VueRouter({ mode: 'history', routes: routes});
+const app = new Vue(Vue.util.extend({ router }, App)).$mount('#app');
