@@ -1208,6 +1208,7 @@ h1, h2, h3, h4, h5, h6 {
 .banner-area {
   background: url(../img/banner/banner-bg.jpg) center no-repeat;
   background-size: cover;
+  margin-top: 5%;
   position: relative; }
   @media (max-width: 768px) {
     .banner-area .fullscreen {

@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
   public function index()
 	{
-		$data['products'] = Product::get();
+		$data['products'] = Product::take(8)->get();
 		$data['categories'] = Category::get();
 		$data['colors'] = Color::get();
 		$data['brands'] = Brand::get();
