@@ -144,7 +144,9 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-6" v-for="product in products">
                         <div class="single-product">
+                        <router-link :to="{ path: '/product/'+product.id}">
                             <img :src="product.image" :alt="product.name" class="img-fluid">
+                        </router-link>
                             <div class="product-details">
                                 <h6>{{ product.name }}</h6>
                                 <div class="price">
@@ -191,7 +193,9 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-6" v-for="product in products">
                         <div class="single-product">
+                        <router-link :to="{ path: '/product/'+product.id}">
                             <img :src="product.image" :alt="product.name" class="img-fluid">
+                        </router-link>
                             <div class="product-details">
                                 <h6>{{ product.name }}</h6>
                                 <div class="price">
@@ -211,10 +215,10 @@
                                         <span class="lnr lnr-sync"></span>
                                         <p class="hover-text">compare</p>
                                     </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-move"></span>
-                                        <p class="hover-text">view more</p>
-                                    </a>
+                                    <router-link :to="{ path: '/product/'+product.id}" class="social-info">
+                                              <span class="lnr lnr-move"></span>
+                                              <p class="hover-text">view more</p>
+                                          </router-link>
                                 </div>
                             </div>
                         </div>
