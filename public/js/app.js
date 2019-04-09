@@ -4118,7 +4118,8 @@ __webpack_require__.r(__webpack_exports__);
         phone: '',
         message: ''
       },
-      rating: []
+      rating: [],
+      allrating: []
     };
   },
   methods: {
@@ -4146,12 +4147,22 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
+  computed: {
+    totalStar: function totalStar() {
+      var sum = 0;
+      this.allrating.forEach(function (e) {
+        sum += e.star;
+      });
+      return sum;
+    }
+  },
   mounted: function mounted() {
     var _this2 = this;
 
     var url = "/api/product/".concat(this.$route.params.id);
     axios.get(url).then(function (response) {
       _this2.rating = response.data.review;
+      _this2.allrating = response.data.review;
     })["catch"](function (error) {
       console.log(error);
     });
@@ -44506,7 +44517,29 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col-lg-6" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "row total_rate" }, [
+        _c("div", { staticClass: "col-6" }, [
+          _c("div", { staticClass: "box_total" }, [
+            _c("h5", [_vm._v("Overall")]),
+            _vm._v(" "),
+            _c("h4", [
+              _vm._v(_vm._s(Math.round(_vm.totalStar / _vm.allrating.length)))
+            ]),
+            _vm._v(" "),
+            _c("h6", [_vm._v("(" + _vm._s(_vm.allrating.length) + " Reviews)")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6" }, [
+          _c("div", { staticClass: "rating_list" }, [
+            _c("h3", [
+              _vm._v("Based on " + _vm._s(_vm.allrating.length) + " Reviews")
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ])
+        ])
+      ]),
       _vm._v(" "),
       _c(
         "div",
@@ -44593,12 +44626,12 @@ var render = function() {
                     id: "star-1",
                     type: "radio",
                     name: "star",
-                    value: "1"
+                    value: "5"
                   },
-                  domProps: { checked: _vm._q(_vm.review.star, "1") },
+                  domProps: { checked: _vm._q(_vm.review.star, "5") },
                   on: {
                     change: function($event) {
-                      return _vm.$set(_vm.review, "star", "1")
+                      return _vm.$set(_vm.review, "star", "5")
                     }
                   }
                 }),
@@ -44622,12 +44655,12 @@ var render = function() {
                     id: "star-2",
                     type: "radio",
                     name: "star",
-                    value: "2"
+                    value: "4"
                   },
-                  domProps: { checked: _vm._q(_vm.review.star, "2") },
+                  domProps: { checked: _vm._q(_vm.review.star, "4") },
                   on: {
                     change: function($event) {
-                      return _vm.$set(_vm.review, "star", "2")
+                      return _vm.$set(_vm.review, "star", "4")
                     }
                   }
                 }),
@@ -44680,12 +44713,12 @@ var render = function() {
                     id: "star-4",
                     type: "radio",
                     name: "star",
-                    value: "4"
+                    value: "2"
                   },
-                  domProps: { checked: _vm._q(_vm.review.star, "4") },
+                  domProps: { checked: _vm._q(_vm.review.star, "2") },
                   on: {
                     change: function($event) {
-                      return _vm.$set(_vm.review, "star", "4")
+                      return _vm.$set(_vm.review, "star", "2")
                     }
                   }
                 }),
@@ -44709,12 +44742,12 @@ var render = function() {
                     id: "star-5",
                     type: "radio",
                     name: "star",
-                    value: "5"
+                    value: "1"
                   },
-                  domProps: { checked: _vm._q(_vm.review.star, "5") },
+                  domProps: { checked: _vm._q(_vm.review.star, "1") },
                   on: {
                     change: function($event) {
-                      return _vm.$set(_vm.review, "star", "5")
+                      return _vm.$set(_vm.review, "star", "1")
                     }
                   }
                 }),
@@ -44875,83 +44908,47 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row total_rate" }, [
-      _c("div", { staticClass: "col-6" }, [
-        _c("div", { staticClass: "box_total" }, [
-          _c("h5", [_vm._v("Overall")]),
-          _vm._v(" "),
-          _c("h4", [_vm._v("4.0")]),
-          _vm._v(" "),
-          _c("h6", [_vm._v("(03 Reviews)")])
+    return _c("ul", { staticClass: "list" }, [
+      _c("li", [
+        _c("a", [
+          _vm._v("5 Star "),
+          _c("i", { staticClass: "fa fa-star" }),
+          _c("i", { staticClass: "fa fa-star" }),
+          _c("i", { staticClass: "fa fa-star" }),
+          _c("i", { staticClass: "fa fa-star" }),
+          _c("i", { staticClass: "fa fa-star" })
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-6" }, [
-        _c("div", { staticClass: "rating_list" }, [
-          _c("h3", [_vm._v("Based on 3 Reviews")]),
-          _vm._v(" "),
-          _c("ul", { staticClass: "list" }, [
-            _c("li", [
-              _c("a", [
-                _vm._v("5 Star "),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _vm._v(" 01")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", [
-                _vm._v("4 Star "),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _vm._v(" 01")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", [
-                _vm._v("3 Star "),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _vm._v(" 01")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", [
-                _vm._v("2 Star "),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _vm._v(" 01")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", [
-                _vm._v("1 Star "),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _c("i", { staticClass: "fa fa-star" }),
-                _vm._v(" 01")
-              ])
-            ])
-          ])
+      _c("li", [
+        _c("a", [
+          _vm._v("4 Star "),
+          _c("i", { staticClass: "fa fa-star" }),
+          _c("i", { staticClass: "fa fa-star" }),
+          _c("i", { staticClass: "fa fa-star" }),
+          _c("i", { staticClass: "fa fa-star" })
         ])
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _c("a", [
+          _vm._v("3 Star "),
+          _c("i", { staticClass: "fa fa-star" }),
+          _c("i", { staticClass: "fa fa-star" }),
+          _c("i", { staticClass: "fa fa-star" })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _c("a", [
+          _vm._v("2 Star "),
+          _c("i", { staticClass: "fa fa-star" }),
+          _c("i", { staticClass: "fa fa-star" })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _c("a", [_vm._v("1 Star "), _c("i", { staticClass: "fa fa-star" })])
       ])
     ])
   }

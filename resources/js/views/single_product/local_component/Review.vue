@@ -5,19 +5,19 @@
             <div class="col-6">
                 <div class="box_total">
                     <h5>Overall</h5>
-                    <h4>4.0</h4>
-                    <h6>(03 Reviews)</h6>
+                    <h4>{{ Math.round(totalStar/allrating.length) }}</h4>
+                    <h6>({{allrating.length}} Reviews)</h6>
                 </div>
             </div>
             <div class="col-6">
                 <div class="rating_list">
-                    <h3>Based on 3 Reviews</h3>
+                    <h3>Based on {{allrating.length}} Reviews</h3>
                     <ul class="list">
-                        <li><a>5 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-                        <li><a>4 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-                        <li><a>3 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-                        <li><a>2 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-                        <li><a>1 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
+                        <li><a>5 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></a></li>
+                        <li><a>4 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></a></li>
+                        <li><a>3 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></a></li>
+                        <li><a>2 Star <i class="fa fa-star"></i><i class="fa fa-star"></i></a></li>
+                        <li><a>1 Star <i class="fa fa-star"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -71,15 +71,15 @@
                 <h4>Add a Review</h4>
                 <div class="col-md-12">
                     <div>
-                        <input class="star star-1"  v-model="review.star" id="star-1" type="radio" name="star" value="1"/>
+                        <input class="star star-1" v-model="review.star" id="star-1" type="radio" name="star" value="5" />
                         <label class="star star-1" for="star-1"></label>
-                        <input class="star star-2"  v-model="review.star" id="star-2" type="radio" name="star" value="2"/>
+                        <input class="star star-2" v-model="review.star" id="star-2" type="radio" name="star" value="4" />
                         <label class="star star-2" for="star-2"></label>
-                        <input class="star star-3"  v-model="review.star" id="star-3" type="radio" name="star" value="3"/>
+                        <input class="star star-3" v-model="review.star" id="star-3" type="radio" name="star" value="3" />
                         <label class="star star-3" for="star-3"></label>
-                        <input class="star star-4"  v-model="review.star" id="star-4" type="radio" name="star" value="4"/>
+                        <input class="star star-4" v-model="review.star" id="star-4" type="radio" name="star" value="2" />
                         <label class="star star-4" for="star-4"></label>
-                        <input class="star star-5"  v-model="review.star" id="star-5" type="radio" name="star" value="5"/>
+                        <input class="star star-5" v-model="review.star" id="star-5" type="radio" name="star" value="1" />
                         <label class="star star-5" for="star-5"></label>
                     </div>
                 </div>
@@ -124,7 +124,8 @@ export default {
                 phone: '',
                 message: ''
             },
-            rating: []
+            rating: [],
+            allrating: []
         }
     },
     methods: {
@@ -152,10 +153,21 @@ export default {
             })
         }
     },
+    computed: {
+        totalStar() {
+                let sum = 0;
+                this.allrating.forEach(e => {
+                    sum += e.star;
+                });
+                return sum
+        }
+
+    },
     mounted() {
         let url = `/api/product/${this.$route.params.id}`
         axios.get(url).then(response => {
             this.rating = response.data.review;
+            this.allrating = response.data.review;
         }).catch(error => {
             console.log(error)
         });
