@@ -39820,7 +39820,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Delete cart")]
+                          [_vm._v("Delete")]
                         )
                       ]),
                       _vm._v(" "),
@@ -39835,7 +39835,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("cart")]
+                          [_vm._v("Order")]
                         )
                       ])
                     ])

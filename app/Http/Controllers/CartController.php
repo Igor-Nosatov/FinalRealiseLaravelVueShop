@@ -2,38 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
 use Illuminate\Http\Request;
+use App\Repositories\CartRepository;
 
 class CartController extends Controller
 {
-  public function index()
-  {
-    $data['cart'] = Cart::query()->get();
-    return response()->json($data,200);
-  }
+    protected $cart;
 
-  public function store(Request $request)
+    public function __construct(CartRepository $cart)
     {
-       $cart = new Cart([
-        'name' => $request->get('name'),
-        'image' => $request->get('image'),
-        'price' => $request->get('price'),
-        'qty' => $request->get('qty')
+        $this->cart = $cart;
+    }
 
-      ]);
+    public function index()
+    {
+        $data['cart'] = $this->cart->getCart();
+        return response()->json($data, 200);
+    }
 
-      $cart->save();
-
+    public function store(Request $request)
+    {
+      $this->cart->createCart($request->all());
       return response()->json('success');
     }
 
     public function delete($id)
     {
-      $cart = Cart::find($id);
-
-      $cart->delete();
-
-      return response()->json('successfully deleted');
+        $cart = $this->cart->deleteCart($id);
+        return response()->json('success');
     }
 }

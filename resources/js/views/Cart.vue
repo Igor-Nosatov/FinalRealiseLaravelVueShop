@@ -53,10 +53,10 @@
                                     <h5>$ {{cr.qty * cr.price}} </h5>
                                 </td>
                                 <td>
-                                    <button type="submit" class="primary-btn" @click="deleteCart(cr.id, index)">Delete cart</button>
+                                    <button type="submit" class="primary-btn" @click="deleteCart(cr.id, index)">Delete</button>
                                 </td>
                                 <td>
-                                    <a class="primary-btn" @click="addToOrder(cr)">cart</a>
+                                    <a class="primary-btn" @click="addToOrder(cr)">Order</a>
                                 </td>
                             </tr>
                             <tr>

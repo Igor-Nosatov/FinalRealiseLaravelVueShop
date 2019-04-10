@@ -2,28 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
-
 use Illuminate\Http\Request;
+use App\Repositories\CommentRepository;
 
 class CommentController extends Controller
 {
-
+    public function __construct(CommentRepository $comment)
+    {
+        $this->comment = $comment;
+    }
     public function store(Request $request)
     {
-      $comment = new Comment([
-       'name' => $request->get('name'),
-       'email' => $request->get('email'),
-       'phone' => $request->get('phone'),
-       'message' => $request->get('message'),
-       'product_id' => $request->get('product_id'),
-
-     ]);
-
-     $comment->save();
-
-     return response()->json('success');
+      $this->comment->createComment($request->all());
+      return response()->json('success');
     }
-
-
 }

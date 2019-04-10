@@ -2,25 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Review;
 use Illuminate\Http\Request;
+use App\Repositories\ReviewRepository;
 
 class ReviewController extends Controller
 {
-
+  public function __construct(ReviewRepository $review)
+  {
+      $this->review = $review;
+  }
   public function store(Request $request)
-    {
-       $review = new Review([
-        'star' => $request->get('star'),
-        'name' => $request->get('name'),
-        'email' => $request->get('email'),
-        'phone' => $request->get('phone'),
-        'message' => $request->get('message'),
-        'product_id' => $request->get('product_id'),
-      ]);
-
-      $review->save();
-
-      return response()->json('success');
-    }
+  {
+    $this->review->createReview($request->all());
+    return response()->json('success');
+  }
 }
