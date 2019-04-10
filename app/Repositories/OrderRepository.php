@@ -4,26 +4,26 @@ namespace App\Repositories;
 
 use App\Order;
 
-class OrderRepository 
+class OrderRepository
 {
-  protected $order;
+    protected $order;
 
-  public function __construct(Order $order)
-  {
-      $this->order = $order;
-  }
-  public function getOrder()
-  {
-      return $this->order->get();
-  }
+    public function __construct(Order $order)
+    {
+        $this->order = $order;
+    }
+    public function getOrder()
+    {
+        return $this->order->get();
+    }
 
-  public function createOrder(array $data) : Order
-  {
-      return $this->order->create($data);
-  }
+    public function createOrder(array $data) : Order
+	  {
+		    return $this->order->create($data);
+  	}
 
-  public function deleteOrdert($id) : bool
-  {
-      return $this->order->find($id)->delete();
-  }
+    public function deleteOrder($id) : bool
+	  {
+		    return $this->order->find($id)->delete();
+  	}
 }
